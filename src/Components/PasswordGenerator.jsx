@@ -10,6 +10,8 @@ const uppercaseList = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const numbersList = '0123456789';
 
 function PasswordGenerator() {
+    const [customerName, setCustomerName] = useState('');//new change
+    const [generatedPassword, setGeneratedPassword] = useState('');//new change
     // Declare a state variable called 'password' and a function to update it
     const [password, setPassword] = useState('');
     // Declare a state variable called 'lowerCase' and a function to update it
@@ -54,7 +56,8 @@ function PasswordGenerator() {
     // Define a function called 'generatePassword'
     const generatePassword = () => {
         // Create an empty string called 'characterList'
-        let characterList = '';
+        let characterList = customerName.toLowerCase();
+        //let characterList = '';
         // Check if the 'lowerCase' state variable is true. If it is, add the lowercase letters to 'characterList'
         if (lowerCase) {
             characterList += lowercaseList;
@@ -82,9 +85,16 @@ function PasswordGenerator() {
             // Get the character at the 'characterIndex' position in 'characterList' and add it to 'tempPassword'
             tempPassword += characterList.charAt(characterIndex);
         }
+        //new change
+        tempPassword = tempPassword.split('').sort(() => Math.random() - 0.5).join('');
+
         // Update the 'password' state variable with the new password stored in 'tempPassword'
         setPassword(tempPassword);
     }
+    //new change
+    const handleCustomerNameChange = (event) => {
+        setCustomerName(event.target.value);
+      };
 
     // Define a function called 'copyPassword'
     const copyPassword = async () => {
@@ -115,12 +125,22 @@ function PasswordGenerator() {
                 <div className="password-wrapper">
                     <div className="password-area">
                         <div className="password">
-                            <input type="text" value={password} disabled placeholder='Click on the Generate Password' />
-                            <img src={copyIcon} alt="copyicon" className='copyIcon' onClick={copyPassword} />
+                            <input type="text" id="passwordInput" value={password} disabled placeholder='Click on the Generate Password' />
+                            <img src={copyIcon} alt="copyicon" className='copyIcon' onClick={copyPassword} /><br></br>
+                            <label htmlFor="customerName">Customer Name:</label>
+                            <input
+                                type="text"
+                                id="customerName"
+                                value={customerName}
+                                onChange={handleCustomerNameChange}
+                            />
+                            <div className="buttons">
+                            <button onClick={generatePassword}>Generate Password</button><br></br><br></br><br></br>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div className="setting">
+                <div className="setting"><br></br><br></br><br></br><br></br><br></br>
                     <h3>Customize New Password</h3>
                     <div className="customize">
                         <div className="checkboxes">
