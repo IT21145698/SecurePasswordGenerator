@@ -10,7 +10,6 @@ const uppercaseList = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const numbersList = '0123456789';
 
 function PasswordGenerator() {
-    //testing
     const [customerName, setCustomerName] = useState('');//new change
     const [generatedPassword, setGeneratedPassword] = useState('');//new change
     // Declare a state variable called 'password' and a function to update it
@@ -91,6 +90,8 @@ function PasswordGenerator() {
 
         // Update the 'password' state variable with the new password stored in 'tempPassword'
         setPassword(tempPassword);
+
+        console.log("Password was generated: " + tempPassword);
     }
     //new change
     const handleCustomerNameChange = (event) => {
@@ -117,6 +118,7 @@ function PasswordGenerator() {
                 theme: "colored",
             });
         }
+        console.log("Password was copied: " + copiedText);
     }
 
     return (
